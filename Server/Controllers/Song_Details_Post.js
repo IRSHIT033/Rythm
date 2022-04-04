@@ -35,3 +35,13 @@ export const AddSongsToBucket = asyncHandler(async (req, res) => {
     return res.status(400).send({ message: "Please Fill all the fields" });
   }
 });
+
+export const getAllSong = asyncHandler(async (req, res) => {
+  const songs = await Songs.find();
+  if (songs) {
+    res.status(200).json(songs);
+  } else {
+    res.status(400);
+    throw new Error("failed to get all songs ");
+  }
+});
