@@ -7,18 +7,18 @@ import io from "socket.io-client";
 import "./index.css";
 import GetllAllSongs from "./Components/SongsRelated/GetllAllSongs";
 
-const EndPoint = "http://localhost:5000";
-var socket;
+//const EndPoint = "http://localhost:5000";
+//var socket;
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  useEffect(() => {
+  /* useEffect(() => {
     socket = io(EndPoint);
     if (user) {
       socket.emit("setup", user);
     }
-  }, [user]);
+  }, [user]);*/
 
   if (isLoading) {
     return <div>Loading ...</div>;
