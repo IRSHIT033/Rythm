@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import "./index.css";
 import GetllAllSongs from "./Components/SongsRelated/GetllAllSongs";
+import Controls from "./Components/SongsRelated/Controls";
 
 //const EndPoint = "http://localhost:5000";
 //var socket;
@@ -28,6 +29,7 @@ function App() {
       <img src={user.picture} alt={user.name} />
       <h2>{user.name}</h2>
       <p>{user.email}</p>
+      <Controls />
       <GetllAllSongs />
       <LogoutButton />
     </div>
