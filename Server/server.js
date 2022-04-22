@@ -1,16 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
-import connectDB from "./config/DB.js";
-import { not_found, error_handler } from "./Middleware/errorMiddleware.js";
+import connectDB from "./Config/DB.js";
+import cors from "cors";
+import { error_handler } from "./Middleware/errorMiddleware.js";
 import SongRouter from "./Routes/SongRelatedRoutes.js";
+
 dotenv.config();
 connectDB();
 const app = express();
+app.use(cors());
 app.use(express.json());
 const port = 5000 || process.env.PORT;
 
 //app.use(not_found);
-//app.use(error_handler);
+app.use(error_handler);
 
 app.use("/api/songs", SongRouter);
 const server = app.listen(port, () => {

@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import playerContext from "../../Context/playerContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 const Singlesong = ({
   song_name,
   song_url,
@@ -9,18 +11,26 @@ const Singlesong = ({
   idx,
 }) => {
   const { setCurrent } = useContext(playerContext);
+  const { user } = useAuth0();
 
-  /* const [audio] = useState(new Audio(song_url));
-
-  const [isPlaying, setIsplaying] = useState(false);
-  const playPauseSong = () => {
-    setIsplaying(!isPlaying);
+  const AddToBucket = async (Song_ID, BucketOwner, BucketOwnerID) => {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    const { data } = await axios.post(
+      "/api/user",
+      {
+        Song_ID,
+        BucketOwnerID,
+        BucketOwner,
+      },
+      config
+    );
+    console.log(data);
   };
 
-  useEffect(() => {
-    isPlaying ? audio.play() : audio.pause();
-  }, [isPlaying, audio]);
-*/
   return (
     <>
       <h5>{song_name}</h5>
@@ -29,6 +39,8 @@ const Singlesong = ({
       <h3>{song_artist}</h3>
       <h5>{song_album}</h5>
       <button onClick={() => setCurrent(idx)}>play </button>
+      {"  "}
+      <button onClick={() => AddToBucket()}>+ </button>
     </>
   );
 };

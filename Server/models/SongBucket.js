@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-const SongBucket = mongoose.Schema(
+const SongBucketSchema = mongoose.Schema(
   {
-    BucketOwnerID: { type: String },
+    BucketOwnerID: { type: String, required: true },
     BucketOwner: { type: String, trim: true },
     Songs: [
       {
@@ -14,3 +14,7 @@ const SongBucket = mongoose.Schema(
     timestamps: true,
   }
 );
+
+const SongBucket = mongoose.model("SongBucket", SongBucketSchema);
+
+export default SongBucket;
